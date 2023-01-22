@@ -8,11 +8,11 @@ class PurshasePrice extends Component{
         super(props)
     }
 
-    calculatePriceIp = () => {
-        const {priceShtrips, quantityShtrips, quantityPallets,
-            priceDelivery, cranePrice, weight} = InitialDataField.state;
-            console.log(priceShtrips); //////////////остановился здесь
-    }
+    // calculatePriceIp = () => {
+    //     const {priceShtrips, quantityShtrips, quantityPallets,
+    //         priceDelivery, cranePrice, weight} = InitialDataField.state;
+    //         console.log(priceShtrips); //////////////остановился здесь
+    // }
 
     render () {
         return (
@@ -32,7 +32,7 @@ class PurshasePrice extends Component{
                         для ИП
                     </div>
                     <div className='col-3'>
-                        {this.calculatePriceIp()}
+                        {/* {this.calculatePriceIp()} */}
                     </div>
                     <div className='col-3'>
 
