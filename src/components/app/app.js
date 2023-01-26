@@ -22,7 +22,9 @@ class App extends Component {
             cranePrice: '',
             weight: '',
             isSpringNds: false,
-            priceSpring: ''
+            priceSpring: '',
+            isSellingNds: false,
+            sellingPriceIP: ''
         }
     }
         
@@ -83,17 +85,28 @@ class App extends Component {
     render() {
         return (
             <div className="app">
-                <InitialDataField
-                    data={this.state}
-                    onValueChange={this.onValueChange}
-                    onChangeNds={this.onChangeNds}
-                    reqState={this.reqState}/>
-                <PurshasePrice
-                    calculatePriceIp={this.calculatePriceIp}
-                    calculatePriceOooWithoutNds={this.calculatePriceOooWithoutNds}
-                    calculatePriceOooWithNds={this.calculatePriceOooWithNds}
-                /> 
-            </div>
+                <h1>Калькулятор расчета профиля</h1>
+                <div className='container'>
+                    <div className="row">
+                        <div className='InitialDataField col-7'>
+                            <InitialDataField
+                                data={this.state}
+                                onValueChange={this.onValueChange}
+                                onChangeNds={this.onChangeNds}
+                                reqState={this.reqState}/>
+
+                        
+                        </div>
+
+                        <div className='purshasePrice col-5'>
+                        <PurshasePrice
+                            calculatePriceIp={this.calculatePriceIp}
+                            calculatePriceOooWithoutNds={this.calculatePriceOooWithoutNds}
+                            calculatePriceOooWithNds={this.calculatePriceOooWithNds}/>
+                        </div>
+                    </div>
+                </div>       
+            </div> 
         );
     }
 }

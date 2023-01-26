@@ -8,42 +8,21 @@ const PurshasePrice = (props) => {
 
 
     return (
-        <div className="container">
+        <div className="container  sticky-top">
+            
             <div className="row justify-content-center">
-                <h2>Себестоимость 1м профиля</h2>
-                <div className='col-3'>
-                    без НДС
+                <div>
+                    <h2>Себестоимость 1м профиля</h2>
+                    <div className='col-12'>
+                        для ИП {calculatePriceIp()} р. без НДС
+                    </div>
+                    <div className='col-12'>
+                        для ООО {calculatePriceOooWithoutNds()} р. без НДС {calculatePriceOooWithNds()} с НДС
+                    </div>
                 </div>
-                <div className='col-3'>
-                    с НДС
-                </div>
-            </div>
-        
-            <div className="row justify-content-start">
-                <div className='col-3'>
-                    для ИП
-                </div>
-                <div className='col-3'>
-                    {calculatePriceIp()}
-                </div>
-                <div className='col-3'>
-                    ---
-                </div>
-            </div>
-
-            <div className="row justify-content-start">
-                <div className='col-3'>
-                    для ООО
-                </div>
-                <div className='col-3'>
-                    {calculatePriceOooWithoutNds()}
-                </div>
-                <div className='col-3'>
-                {calculatePriceOooWithNds() }
-                </div>
-            </div>
-
-        </div>
+            </div> 
+        </div>   
+         
     );
 }
 

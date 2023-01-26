@@ -1,4 +1,4 @@
-.costShtrips, .delivery, .weight{
+.costShtrips, .delivery, .weight, .sellingPrice{
     margin-top: 10px;
     padding: 10px 0;
     background: -webkit-linear-gradient(45deg, rgb(152, 207, 195), rgb(86, 181, 184));
