@@ -6,6 +6,7 @@
     background: linear-gradient(45deg, rgb(152, 207, 195), rgb(86, 181, 184));
     color: white;
     border-radius: 4px;
+    box-shadow: 4px 4px 4px #999;
 }
 
 .form-floating label{

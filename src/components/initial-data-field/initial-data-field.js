@@ -1,4 +1,4 @@
-
+import { Container, Row, Col, Form } from 'react-bootstrap';
 
 import './initial-data-field.css'
 
@@ -52,9 +52,9 @@ const InitialDataField = (props) => {
       
       
     return (
-        <div className="container">
+        <Container>
             <div className='costShtrips'>
-                <div className="row justify-content-center">
+                <Row className="row justify-content-center">
                     <h5>Стоимость закупки</h5>
                     <div className='col-10 inits'>
                         {doFormNds('isCostShtripsNds')}
@@ -78,11 +78,11 @@ const InitialDataField = (props) => {
                         {doFormNds('isSpringNds')}
                         {doFormInputNumber('priceSpring', 'Цена пружины', true, 'isSpringNds', true)}
                     </div>
-                </div>
+                </Row>
             </div>
 
             <div className="delivery">
-                <div className="row justify-content-center">
+                <Row className="row justify-content-center">
                     <h5>Доставка</h5>
                     <div className='col-10 inits'>
                         {doFormNds('isPriceDeliveryNds')}
@@ -93,19 +93,19 @@ const InitialDataField = (props) => {
                         {doFormNds('isCraneNds')}
                         {doFormInputNumber('cranePrice', 'Цена автокрана', true, 'isCraneNds', false)}
                     </div>
-                </div>
+                </Row>
             </div>
 
             <div className="weight">
-                <div className="row justify-content-center">
+                <Row className="row justify-content-center">
                     <h5>Расчетный вес 1м профиля</h5>
                     <div className="col-10 inits">
                         {doFormInputNumber('weight', 'вес в кг', false, null, true)}
                     </div>
-                </div>
+                </Row>
             </div>
             <div className="sellingPrice">
-                <div className="row justify-content-center">
+                <Row className="row justify-content-center">
                     <h5>Продажа</h5>
                     <div className="col-10 inits">
                         {doFormNds('isSellingNds')}
@@ -118,9 +118,9 @@ const InitialDataField = (props) => {
                     <div className="col-10 inits">
                         {doFormInputNumber('numberMetersInOrder', 'Кол-во м комплекта в заказе', false, null, true)}
                     </div>
-                </div>
+                </Row>
             </div>
-        </div>
+        </Container>
 );
 
 }

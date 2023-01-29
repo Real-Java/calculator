@@ -1,4 +1,7 @@
 import { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import {Container, Row, Col} from 'react-bootstrap';
 
 import InitialDataField from '../initial-data-field/initial-data-field';
 import PurshasePrice from '../purshase-price/purshase-price';
@@ -32,8 +35,7 @@ class App extends Component {
     
     onValueChange = (e) => {
         this.setState({
-           [e.target.name]: e.target.value
-        });
+           [e.target.name]: e.target.value});
          localStorage.setItem(e.target.name, e.target.value);
     }    
 
@@ -207,31 +209,31 @@ class App extends Component {
     
         return (
             <div className="app">
-                <h1>Калькулятор расчета профиля</h1>
-                <div className='container'>
-                    <div className="row">
-                        <div className='InitialDataField col-7'>
+                 <h1>Калькулятор расчета профиля</h1>
+                <Container>
+                    <Row>
+                        <Col className='InitialDataField col-7'>
                             <InitialDataField
                                 data={this.state}
                                 onValueChange={this.onValueChange}
                                 onChangeNds={this.onChangeNds}
                                 reqState={this.reqState}/>
-                        </div>
+                        </Col>
 
-                        <div className='purshasePrice col-5'>
-                        <PurshasePrice
-                            calculatePriceIp={this.calculatePriceIp}
-                            calculatePriceOooWithoutNds={this.calculatePriceOooWithoutNds}
-                            calculatePriceOooWithNds={this.calculatePriceOooWithNds}
-                            netProfitIp={this.netProfitIp}
-                            netProfitOOO={this.netProfitOOO}
-                            netProfitSpringIp={this.netProfitSpringIp}
-                            netProfitSpringOOO={this.netProfitSpringOOO}
-                            netProfitComplectIp={this.netProfitComplectIp}
-                            netProfitComplectOOO={this.netProfitComplectOOO}/>
-                        </div>
-                    </div>
-                </div>       
+                        <Col className='purshasePrice col-5'>
+                            <PurshasePrice
+                                calculatePriceIp={this.calculatePriceIp}
+                                calculatePriceOooWithoutNds={this.calculatePriceOooWithoutNds}
+                                calculatePriceOooWithNds={this.calculatePriceOooWithNds}
+                                netProfitIp={this.netProfitIp}
+                                netProfitOOO={this.netProfitOOO}
+                                netProfitSpringIp={this.netProfitSpringIp}
+                                netProfitSpringOOO={this.netProfitSpringOOO}
+                                netProfitComplectIp={this.netProfitComplectIp}
+                                netProfitComplectOOO={this.netProfitComplectOOO}/>
+                        </Col>
+                    </Row>
+                </Container>       
             </div> 
         );
     }
