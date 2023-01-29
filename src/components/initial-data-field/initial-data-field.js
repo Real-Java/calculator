@@ -3,132 +3,123 @@
 import './initial-data-field.css'
 
 const InitialDataField = (props) => {
-    const {isCostShtripsNds, priceShtrips, isPalletNds, pricePallet, quantityShtrips,         quantityPallets, isPriceDeliveryNds, priceDelivery, isCraneNds,
-    cranePrice, weight, priceSpring, sellingPriceIP} = props.data;
+    // const {isCostShtripsNds, priceShtrips, isPalletNds, pricePallet, quantityShtrips,         quantityPallets, isPriceDeliveryNds, priceDelivery, isCraneNds,
+    // cranePrice, weight, priceSpring, sellingPrice} = props.data;
     const {onValueChange, onChangeNds, reqState} = props;
        
     const redBorder = (prop) => {
+        
         if (prop > 0 ){
             return "form-control";
         }else {
             return "form-control is-invalid"
         }
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
+   
+    const numberInputOnWheelPreventChange = (e) => { 
+        // Предотвратить изменение входного значения 
+        e.target.blur() 
+    
+        // Предотвратить прокрутку страницы/контейнера 
+        e.stopPropagation() 
+    
+        // Немедленно перефокусироваться, на следующий тик (после выполнения текущей      
+        //функции) 
+        setTimeout(() => { 
+            e.target.focus() 
+        }, 0) 
+    } 
+
+    const doFormNds = (prop) => {
+        
+        return <div className="form-check form-switch">
+            <input key={prop} onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id={prop} data-toggle={prop} checked={reqState(prop) ? true: false}/>
+            <label className="form-check-label" htmlFor="{prop}">НДС</label>
+        </div>
+    }
+
+    const doFormInputNumber = (name, text, req, reqIs, redBord) => {
+        return <form className="form-floating" onSubmit={handleSubmit} key={name}>
+                    <input onChange={(e) => onValueChange(e)} onWheel={numberInputOnWheelPreventChange} type="number" min='0' step='0.01' className={redBorder(redBord ? props.data[name] : 1)} id={name} placeholder="number" name={name} value={reqState(name)}/>
+                    <label htmlFor={name}>{text} {req ? reqState(reqIs) ? 'с НДС' : 'без НДС' : ''}</label>
+                </form>
+    }
+      
+      
     return (
         <div className="container">
             <div className='costShtrips'>
                 <div className="row justify-content-center">
-                    <h2>Стоимость на заводе</h2>
+                    <h5>Стоимость закупки</h5>
                     <div className='col-10 inits'>
-                        <div className="form-check form-switch">
-                            <input onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id="switchNds1" data-toggle="isCostShtripsNds"
-                            />
-                            <label className="form-check-label" htmlFor="switchNds1">НДС</label>
-                        </div>
-                        
-                        <form className="form-floating">
-                                <input onChange={(e) => onValueChange(e)} type="number" min='0' step='0.01' className={redBorder(priceShtrips)} id="priceShtrips" placeholder="number" name="priceShtrips"/>
-                            <label htmlFor="priceShtrips">Цена штрипса {reqState('isCostShtripsNds') ? 'с НДС' : 'без НДС'}</label>
-                        </form>
+                        {doFormNds('isCostShtripsNds')}
+                        {doFormInputNumber('priceShtrips', 'Цена штрипса', true, 'isCostShtripsNds', true)}
                     </div>
 
                     <div className='col-10 inits'>
-                        <form className="form-floating">
-                            <input onChange={(e) => onValueChange(e)} type="number" min='0' step='any' className={redBorder(quantityShtrips)} id="quantityShtrips" placeholder="number" name="quantityShtrips"/>
-                            <label htmlFor="quantityShtrips">Количество штрипса в тоннах</label>
-                        </form>
+                        {doFormInputNumber('quantityShtrips', 'Количество штрипса в тоннах ', false, null, true)}
                     </div>
                     
                     <div className='col-10 inits'>
-                        <div className="form-check form-switch">
-                            <input onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id="switchNds2" data-toggle="isPalletNds"/>
-                            <label className="form-check-label" htmlFor="switchNds2">НДС</label>
-                        </div>
-                        <form className="form-floating">
-                            <input onChange={(e) => onValueChange(e)} type="number" min='0' className="form-control" id="palletPrice" placeholder="number" name="pricePallet"/>
-                            <label htmlFor="palletPrice">Цена паллета {reqState('isPalletNds') ? 'с НДС' : 'без НДС'}</label>
-                        </form>
+                        {doFormNds('isPalletNds')}
+                        {doFormInputNumber('pricePallet', 'Цена паллета', true, 'isPalletNds', false)}
+                      </div>
 
+                    <div className='col-10 inits'>
+                        {doFormInputNumber('quantityPallets', 'Количество Паллетов', false, null, false)}
                     </div>
 
                     <div className='col-10 inits'>
-                        <form className="form-floating">
-                            <input onChange={(e) => onValueChange(e)} type="number" min='0' className="form-control" id="quantityPallets" placeholder="number" name="quantityPallets"/>
-                            <label htmlFor="quantityPallets">Количество Паллетов</label>
-                        </form>
+                        {doFormNds('isSpringNds')}
+                        {doFormInputNumber('priceSpring', 'Цена пружины', true, 'isSpringNds', true)}
                     </div>
-                    <div className='col-10 inits'>
-                        <div className="form-check form-switch">
-                            <input onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id="switchNds3" data-toggle="isSpringNds"
-                            />
-                            <label className="form-check-label" htmlFor="switchNds3">НДС</label>
-                        </div>
-                    
-                        <form className="form-floating">
-                                <input onChange={(e) => onValueChange(e)} type="number" min='0' step='0.01' className={redBorder(priceSpring)} id="priceSpring" placeholder="number" name="priceSpring"/>
-                            <label htmlFor="priceSpring">Цена пружины {reqState('isSpringNds') ? 'с НДС' : 'без НДС'}</label>
-                        </form>
-                    </div>
-                 </div>
+                </div>
             </div>
 
             <div className="delivery">
                 <div className="row justify-content-center">
-                    <h2>Доставка</h2>
+                    <h5>Доставка</h5>
                     <div className='col-10 inits'>
-                        <div className="form-check form-switch">
-                            <input onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id="switchNds4"
-                            data-toggle="isPriceDeliveryNds"/>
-                            <label className="form-check-label" htmlFor="switchNds4">НДС</label>
-                        </div>
-                        <form className="form-floating">
-                            
-                            <input onChange={(e) => onValueChange(e)} type="number" min='0' className="form-control" id="deliveryPrice" placeholder="number" name="priceDelivery"/>
-                            <label htmlFor="deliveryPrice">Цена доставки {reqState('isPriceDeliveryNds') ? 'с НДС' : 'без НДС'}</label>
-                        </form>
+                        {doFormNds('isPriceDeliveryNds')}
+                        {doFormInputNumber('priceDelivery', 'Цена доставки', true, 'isPriceDeliveryNds', false)}
                     </div>
 
                     <div className='col-10 inits'>
-                        <div className="form-check form-switch">
-                            <input onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id="switchNds5"
-                            data-toggle="isCraneNds"/>
-                            <label className="form-check-label" htmlFor="switchNds5">НДС</label>
-                        </div>
-                        <form className="form-floating">
-                            <input onChange={(e) => onValueChange(e)} type="number" min='0' className="form-control" id="crane" placeholder="number" name="cranePrice"/>
-                            <label htmlFor="crane">Цена автокрана {reqState('isCraneNds') ? 'с НДС' : 'без НДС'}</label>
-                        </form>
+                        {doFormNds('isCraneNds')}
+                        {doFormInputNumber('cranePrice', 'Цена автокрана', true, 'isCraneNds', false)}
                     </div>
                 </div>
             </div>
 
             <div className="weight">
                 <div className="row justify-content-center">
-                    <h2>Расчетный вес 1м профиля</h2>
+                    <h5>Расчетный вес 1м профиля</h5>
                     <div className="col-10 inits">
-                    <form className="form-floating">
-                                <input onChange={(e) => onValueChange(e)} type="number" min='0' step='any' className={redBorder(weight)} id="weight" placeholder="number" name="weight"/>
-                            <label htmlFor="weight">вес в кг.</label>
-                        </form>
+                        {doFormInputNumber('weight', 'вес в кг', false, null, true)}
                     </div>
                 </div>
             </div>
             <div className="sellingPrice">
                 <div className="row justify-content-center">
-                    <h2>Продажа профиля</h2>
+                    <h5>Продажа</h5>
                     <div className="col-10 inits">
-                    <div className="form-check form-switch">
-                        <input onChange={(e) => onChangeNds(e)} className="form-check-input" type="checkbox" role="switch" id="switchNds6" data-toggle="isSellingNds"/>
-                        <label className="form-check-label" htmlFor="switchNds6">НДС</label>
+                        {doFormNds('isSellingNds')}
+                        {doFormInputNumber('sellingPrice', 'Цена профиля', true, 'isSellingNds', true)}
                     </div>
-                        <form className="form-floating">
-                            <input onChange={(e) => onValueChange(e)} type="number" min='0' step='0.01' className={redBorder(sellingPriceIP)} id="sellingPriceIP" placeholder="number" name="sellingPriceIP"/>
-                        <label htmlFor="sellingPriceIP">Цена профиля {reqState('isSellingNds') ? 'с НДС' : 'без НДС'}</label>
-                        </form>
+                    <div className="col-10 inits">
+                        {doFormNds('isSellingSpringNds')}
+                        {doFormInputNumber('sellingPriceSpring', 'Цена пружины', true, 'isSellingSpringNds', true)}
+                    </div>
+                    <div className="col-10 inits">
+                        {doFormInputNumber('numberMetersInOrder', 'Кол-во м комплекта в заказе', false, null, true)}
                     </div>
                 </div>
             </div>
-            
         </div>
 );
 
